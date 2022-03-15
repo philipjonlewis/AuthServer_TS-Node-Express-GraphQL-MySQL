@@ -4,14 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const mysql2_1 = __importDefault(require("mysql2"));
 const app = (0, express_1.default)();
-const mysql = require("mysql");
-const connection = mysql.createConnection({
+const connection = mysql2_1.default.createConnection({
     port: 3306,
     host: "localhost",
     user: "root",
-    // password: "07131992",
-    // database: "information_schema",
+    password: "07131992",
+    socketPath: "/tmp/mysql.sock",
 });
 connection.connect((err) => {
     if (err)
@@ -19,8 +19,8 @@ connection.connect((err) => {
     console.log("Connected to MySQL Server!");
 });
 app.get("/", (req, res, next) => {
-    res.send("hjel;l0");
+    res.send("Hello");
 });
 app.listen(3000, () => {
-    console.log("hello");
+    console.log("Server Live");
 });
