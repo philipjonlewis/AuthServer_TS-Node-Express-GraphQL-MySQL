@@ -9,21 +9,11 @@ import express, {
   RequestHandler,
 } from "express";
 
-import bodyParser from "body-parser";
-import mysql from "mysql2";
-
 import { graphQLSchema } from "./GraphQL/mainGraphQLSchema";
 
-// const connection = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   database: "test",
-//   // password: "your_password",
-//   port: 3306,
-//   // socketPath: "/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock",
-// });
+import { mysqlDbConnection } from "./model/dbConnection";
 
-// console.log(connection);
+mysqlDbConnection();
 
 const app: Application = express();
 
