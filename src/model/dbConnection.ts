@@ -9,9 +9,13 @@ export const mysqlDbConnection = async () => {
       port: 3306,
     });
 
-    console.log("connected to the database");
+    // const insertion = await connection.execute(
+    //   "INSERT INTO `users` (`_id`, `firstName`, `lastName`, `username`, `email`) VALUES (NULL, 'Nannon', 'Korapat', 'nanorapat', 'nanorapat@gmail.com');"
+    // );
 
-    return connection;
+    // console.log(insertion);
+
+    console.log("connected to the database");
   } catch (error) {
     console.error(error);
   }

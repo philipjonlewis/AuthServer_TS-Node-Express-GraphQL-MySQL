@@ -3,21 +3,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("dotenv/config");
+const express_graphql_1 = require("express-graphql");
 const express_1 = __importDefault(require("express"));
-const mysql2_1 = __importDefault(require("mysql2"));
+const mainGraphQLSchema_1 = require("./GraphQL/mainGraphQLSchema");
+const dbConnection_1 = require("./model/dbConnection");
+(0, dbConnection_1.mysqlDbConnection)();
 const app = (0, express_1.default)();
-const connection = mysql2_1.default.createConnection({
-    port: 3306,
-    host: "localhost",
-    user: "root",
-    password: "07131992",
-    socketPath: "/tmp/mysql.sock",
-});
-connection.connect((err) => {
-    if (err)
-        throw err;
-    console.log("Connected to MySQL Server!");
-});
+app.use("/graphql", (0, express_graphql_1.graphqlHTTP)({
+    schema: mainGraphQLSchema_1.graphQLSchema,
+    graphiql: true,
+}));
 app.get("/", (req, res, next) => {
     res.send("Hello");
 });

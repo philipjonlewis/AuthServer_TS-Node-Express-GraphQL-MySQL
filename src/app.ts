@@ -13,9 +13,12 @@ import { graphQLSchema } from "./GraphQL/mainGraphQLSchema";
 
 import { mysqlDbConnection } from "./model/dbConnection";
 
-
+mysqlDbConnection();
 
 const app: Application = express();
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(
   "/graphql",
