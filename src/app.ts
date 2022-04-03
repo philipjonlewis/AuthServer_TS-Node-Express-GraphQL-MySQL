@@ -13,7 +13,7 @@ import { graphQLSchema } from "./GraphQL/mainGraphQLSchema";
 
 import { mysqlDbConnection } from "./model/dbConnection";
 
-mysqlDbConnection();
+
 
 const app: Application = express();
 
