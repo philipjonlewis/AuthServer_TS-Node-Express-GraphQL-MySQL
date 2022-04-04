@@ -23,18 +23,42 @@
 //   }
 // };
 
-import { Sequelize } from "sequelize";
+import { Sequelize, DataTypes, Model } from "sequelize";
 
 const sequelize = new Sequelize("authServer_01", "root", "", {
   host: "localhost",
+  port: 3306,
   dialect: "mysql",
 });
+
+const User = sequelize.define(
+  "User",
+  {
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      // allowNull defaults to true
+    },
+  },
+  { freezeTableName: true, tableName: "User" }
+);
+
+const createUser = async () => {
+  const users = await User.findAll({ raw: true });
+
+  console.log(users);
+};
+
+createUser();
 
 export const mysqlDbConnection = async () => {
   try {
     await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
+    console.log("Connection has been established successfully.");
   } catch (error) {
-    console.error('Unable to connect to the database:', error);
+    console.error("Unable to connect to the database:", error);
   }
 };
