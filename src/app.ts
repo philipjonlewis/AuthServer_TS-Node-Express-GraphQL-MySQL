@@ -12,6 +12,11 @@ import express, {
 import { graphQLSchema } from "./GraphQL/mainGraphQLSchema";
 
 import { mysqlDbConnection } from "./model/dbConnection";
+import { errorMiddleware } from "./middleware/error/errorMiddleware";
+
+//enables using dotenv files
+import dotenv from "dotenv";
+dotenv.config();
 
 mysqlDbConnection();
 
@@ -32,6 +37,8 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
   res.send("Hello");
 });
 
-app.listen(3000, () => {
-  console.log("Server Live");
+app.use(errorMiddleware);
+
+app.listen(process.env.PORT, () => {
+  console.log(`App listening on port ${process.env.PORT}!`);
 });
