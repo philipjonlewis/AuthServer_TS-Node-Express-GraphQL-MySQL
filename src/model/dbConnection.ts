@@ -1,6 +1,8 @@
 import mysql from "mysql2/promise";
 
-export const mysqlDbConnection = async () => {
+import { asyncHandler } from "../utils/asyncHandler";
+
+export const mysqlDbConnection = asyncHandler(async () => {
   try {
     const connection = await mysql.createConnection({
       host: "localhost",
@@ -19,4 +21,4 @@ export const mysqlDbConnection = async () => {
   } catch (error) {
     console.error(error);
   }
-};
+});
