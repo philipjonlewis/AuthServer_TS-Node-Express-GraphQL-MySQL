@@ -25,34 +25,13 @@
 
 import { Sequelize, DataTypes, Model } from "sequelize";
 
-const sequelize = new Sequelize("authServer_01", "root", "", {
+export const sequelize = new Sequelize("authServer_01", "root", "", {
   host: "localhost",
   port: 3306,
   dialect: "mysql",
 });
 
-const User = sequelize.define(
-  "User",
-  {
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    lastName: {
-      type: DataTypes.STRING,
-      // allowNull defaults to true
-    },
-  },
-  { freezeTableName: true, tableName: "User" }
-);
 
-const createUser = async () => {
-  const users = await User.findAll({ raw: true });
-
-  console.log(users);
-};
-
-createUser();
 
 export const mysqlDbConnection = async () => {
   try {

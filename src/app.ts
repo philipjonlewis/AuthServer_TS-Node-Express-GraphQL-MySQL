@@ -20,6 +20,16 @@ dotenv.config();
 
 mysqlDbConnection();
 
+import { User } from "./model/user/userModel";
+
+const findAllUsers = async () => {
+  const users = await User.findAll({ raw: true });
+
+  console.log(users);
+};
+
+findAllUsers();
+
 const app: Application = express();
 
 app.use(express.urlencoded({ extended: true }));
